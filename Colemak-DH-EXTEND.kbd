@@ -1,0 +1,41 @@
+(defcfg
+  ;; For Linux found on /dev/input/<event#>
+
+  ;; For Linux found on /dev/input/
+  ;; example: "/dev/input/event3"
+  input  (device-file "/dev/input/event<Number here>")
+  output (uinput-sink "KMonad Colemak-DH ISO/ANSI")
+
+  ;; Options
+  fallthrough true
+  allow-cmd false
+)
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet cmp  rctl
+)
+
+(defalias
+  myExtned ( layer-toggle extend )
+)
+
+(deflayer colemak-dh
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    f    p    b    j    l    u    y    ;    [    ]    \
+  @myExtned a    r    s    t    g    m    n    e    i    o    '    ret
+  lsft z    x    c    d    v    k    h    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet cmp  rctl
+)
+
+(deflayer extend
+  _    F1    F2    F3    F4    F5    F6    F7    F8    F9    F10    F11    F12    _
+  _    Esc     _       Back    Forward   _    pageup      Home    Up     End    del     Esc        _      _
+  _    lalt    lmet    lsft    lctl      _    pagedown    Left    down   Right  bspc    Compose    ret
+  _    Undo    Cut     Copy    Paste     _    _           _       _      _      _       _
+  _    _    _              ret              _    _    _    _
+)
+

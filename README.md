@@ -12,6 +12,17 @@
     <a href="#disclaimer">Disclaimer</a>
 </p>
 
+---
+
+# Running The Colemak-DH + EXTEND layer
+### First make sure to add the keyboard event from `/dev/input/event<number>`
+
+Example:
+`input  (device-file "/dev/input/event3")`
+
+**to run the layout on Linux**:  `sudo kmonad Colemak-DH-EXTEND.kbd`
+
+---
 ## Introduction
 
 KMonad is an advanced tool that lets you infinitely customize and extend the functionalities of almost any keyboard. For a detailed list of features, see [here](#features).
