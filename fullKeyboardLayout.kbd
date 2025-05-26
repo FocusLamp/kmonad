@@ -1,0 +1,79 @@
+(defcfg
+  input  (device-file "/dev/input/event3")
+  output (uinput-sink "KMonad Colemak-DH ISO/ANSI")
+
+  ;; Options
+  fallthrough true
+  allow-cmd false
+)
+
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12                               ssrq slck pause
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc                         ins  home pgup  nlck kp/  kp*  kp-
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \                            del  end  pgdn  kp7  kp8  kp9  kp+
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret                                               kp4  kp5  kp6
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft                                        up         kp1  kp2  kp3  kprt
+  lctl lmet lalt           spc            ralt rmet cmp  rctl                                   left down rght  kp0  kp.
+)
+
+(defalias
+  myExtned ( layer-toggle extend )
+  mc0 #(C-z) ;; Undo (Tip: don't activate it on the terminal while kmonad is running to avoid locking your keyboard)
+  mc1 #(C-x) ;; Cut
+  mc2 #(C-c) ;; Copy
+  mc3 #(C-v) ;; Paste
+  mc4 #(C-y) ;; Redo
+)
+
+(deflayer colemak-dh
+  _    _    _    _    _    _    _    _    _    _    _    _    _                                    _    _    _
+  grv     _    _    _    _    _    _    _    _    _    _    _    _   _                             _    _    _     _    _    _    _
+  tab     q    w    f    p    b    j    l    u    y    ;    [    ]   \                             _    _    _     _    _    _    _
+  @myExtned   a  r  s    t    g    m    n    e    i    o    '    ret                                               _    _    _
+  lsft    z    x    c    d    v    k    h    ,    .    /    sft                                         _          _    _    _    _
+  lctl    lmet    lalt          spc          ralt    rmet    cmp    rctl                           _    _    _     _    _   
+)
+
+
+
+(deflayer extend
+  _    _    _    _    _    _    _    _    _    _    _    _    _                                    _    _    _
+  caps F1   F2   F3   F4   F5   F6   F7   F8   F9   F10  F11  F12  F4                              _    _    _     _    _    _    _
+  _    Esc  _    Back Forward _    pageup Home Up   End  del  Esc  _    _                          _    _    _     _    _    _    _
+  _    lalt lmet rsft lctl _    pagedown Left down Right bspc Compose ssrq                                         _    _    _
+  _    @mc0 @mc1 @mc2 @mc3 _    _        _    _    _     _    _                                         _          _    _    _    _
+  _    _    _              ret            _    _    _    _                                         _    _    _     _    _   
+)
+
+(deflayer qwerty
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12                               ssrq slck pause
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc                         ins  home pgup  nlck kp/  kp*  kp-
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \                            del  end  pgdn  kp7  kp8  kp9  kp+
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret                                               kp4  kp5  kp6
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft                                        up         kp1  kp2  kp3  kprt
+  lctl lmet lalt           spc            ralt rmet cmp  rctl                                   left down rght  kp0  kp.
+)
+
+
+#| --------------------------------------------------------------------------------------------------
+
+(deflayer name
+  _    _    _    _    _    _    _    _    _    _    _    _    _          _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _    _     _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _    _     _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _                          _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _                    _          _    _    _    _
+  _    _    _              _              _    _    _    _               _    _    _     _    _   
+)
+
+
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12        ssrq slck pause
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc  ins  home pgup  nlck kp/  kp*  kp-
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \     del  end  pgdn  kp7  kp8  kp9  kp+
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret                        kp4  kp5  kp6
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft                 up         kp1  kp2  kp3  kprt
+  lctl lmet lalt           spc            ralt rmet cmp  rctl            left down rght  kp0  kp.
+)
+
+-------------------------------------------------------------------------------------------------- |#
