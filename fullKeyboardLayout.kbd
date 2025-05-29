@@ -7,6 +7,7 @@
   allow-cmd false
 )
 
+
 (defsrc
   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12                               ssrq slck pause
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc                         ins  home pgup  nlck kp/  kp*  kp-
@@ -17,23 +18,28 @@
 )
 
 (defalias
-  myExtned ( layer-toggle extend )
+  ;; Hotkeys
   mc0 #(C-z) ;; Undo (Tip: don't activate it on the terminal while kmonad is running to avoid locking your keyboard)
   mc1 #(C-x) ;; Cut
   mc2 #(C-c) ;; Copy
   mc3 #(C-v) ;; Paste
   mc4 #(C-y) ;; Redo
+
+  ;; Layers
+  myExtned ( layer-toggle extend )
+  toggle-layout (stepped (layer-switch qwerty) (layer-switch colemak-dh))
+  num-mode (layer-toggle numpad-visual)
 )
+
 
 (deflayer colemak-dh
   _    _    _    _    _    _    _    _    _    _    _    _    _                                    _    _    _
-  grv     _    _    _    _    _    _    _    _    _    _    _    _   _                             _    _    _     _    _    _    _
+  grv     _    _    _    _    _    _    _    _    _    _    _    _   _                             @toggle-layout    _    _     _    _    _    _
   tab     q    w    f    p    b    j    l    u    y    ;    [    ]   \                             _    _    _     _    _    _    _
   @myExtned   a  r  s    t    g    m    n    e    i    o    '    ret                                               _    _    _
   lsft    z    x    c    d    v    k    h    ,    .    /    sft                                         _          _    _    _    _
-  lctl    lmet    lalt          spc          ralt    rmet    cmp    rctl                           _    _    _     _    _   
+  lctl    lmet    lalt          spc          @num-mode    rmet    cmp    rctl                           _    _    _     _    _   
 )
-
 
 
 (deflayer extend
@@ -47,12 +53,23 @@
 
 (deflayer qwerty
   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12                               ssrq slck pause
-  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc                         ins  home pgup  nlck kp/  kp*  kp-
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc                         @toggle-layout  home pgup  nlck kp/  kp*  kp-
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \                            del  end  pgdn  kp7  kp8  kp9  kp+
-  caps a    s    d    f    g    h    j    k    l    ;    '    ret                                               kp4  kp5  kp6
+  @myExtned a    s    d    f    g    h    j    k    l    ;    '    ret                                               kp4  kp5  kp6
   lsft z    x    c    v    b    n    m    ,    .    /    rsft                                        up         kp1  kp2  kp3  kprt
   lctl lmet lalt           spc            ralt rmet cmp  rctl                                   left down rght  kp0  kp.
 )
+
+
+(deflayer numpad-visual
+  _    _    _    _    _    _    _    _    _    _    _    _    _                                                           _    _    _
+  _    !    $    ^    #     $      %      kp7     kp8    kp9    kp-    kp*    =    _                                      _    _    _     _    _    _    _
+  _    Home    up    End    del    esc    pgup    kp4    kp5    kp6    kp+    lprn    rprn    comma                       _    _    _     _    _    _    _ 
+  _    left    down  right  bspc   nlck   pgdn    kp1    kp2    kp3    kprt    apostrophe    _                                            _    _    _
+  _    _  @mc1 @mc2  @mc3  BrightnessDown BrightnessUp   kp0    kp0    kpdot  kp/    _                                         _          _    _    _    _
+  _    _    _              _              _    _    _    _                                                                _    _    _     _    _   
+)
+
 
 
 #| --------------------------------------------------------------------------------------------------
